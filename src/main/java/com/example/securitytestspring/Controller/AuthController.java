@@ -38,7 +38,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/get")
+    @GetMapping("/get")
     public ResponseEntity findAllUser(){
 
         return ResponseEntity.ok(authService.getAll());
