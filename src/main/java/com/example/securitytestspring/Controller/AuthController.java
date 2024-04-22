@@ -5,6 +5,7 @@ import com.example.securitytestspring.Service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -37,6 +38,7 @@ public class AuthController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("get")
     public ResponseEntity findAllUser(){
 
