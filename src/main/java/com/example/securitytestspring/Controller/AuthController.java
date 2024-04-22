@@ -19,33 +19,32 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity registerUser(@RequestBody @Valid User user){
         authService.register(user);
         return ResponseEntity.ok("User has been added : \n" + user);
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity login(){
 
         return ResponseEntity.ok(("welcome back!"));
     }
 
-    @PostMapping("logout")
+    @PostMapping("/logout")
     public ResponseEntity logout(){
 
         return ResponseEntity.ok("Bye!");
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("get")
+    @PostMapping("/get")
     public ResponseEntity findAllUser(){
 
         return ResponseEntity.ok(authService.getAll());
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public ResponseEntity delete(String username){
         authService.delete(username);
         return ResponseEntity.ok("user has been deleted");

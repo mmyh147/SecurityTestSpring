@@ -37,16 +37,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http
-                .csrf().disable()
+        http.csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/register").permitAll()
-                .requestMatchers("/api/v1/auth/get", "/api/v1/auth/delete").hasRole("ADMIN")
-                .anyRequest().permitAll()
+                .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/logout").permitAll()
+                .requestMatchers("/api/v1/auth/get", "/api/v1/auth/delete", "/api/v1/todo/get-all").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/todo/get", "/api/v1/todo/add", "/api/v1/auth/delete", "/api/v1/todo/update/").hasAuthority("CUSTOMER")
+                .anyRequest().authenticated()
                 .and()
                 .logout().logoutUrl("/api/v1/auth/logout")
                 .deleteCookies("JSESSIONID")

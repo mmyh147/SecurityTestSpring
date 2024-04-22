@@ -1,12 +1,17 @@
 package com.example.securitytestspring.Repository;
 
+import com.example.securitytestspring.Model.Todo;
 import com.example.securitytestspring.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AuthRepository extends JpaRepository<User, Integer> {
+import java.util.List;
 
-    User findUserByUsername(String username);
-    User findUserById(Integer id);
+@Repository
+public interface TodoRepository extends JpaRepository<Todo, Integer> {
+
+
+    Todo findTodoById(Integer id);
+
+    List<Todo> findAllByUser(User user);
 }
